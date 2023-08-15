@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/indian_constitution_quizmaster/indian_constitution_quizmaster.iml" filepath="$PROJECT_DIR$/indian_constitution_quizmaster/indian_constitution_quizmaster.iml" />
+      <module fileurl="file://$PROJECT_DIR$/indian_constitution_quizmaster/android/indian_constitution_quizmaster_android.iml" filepath="$PROJECT_DIR$/indian_constitution_quizmaster/android/indian_constitution_quizmaster_android.iml" />
+    </modules>
+  </component>
+</project>
