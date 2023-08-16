@@ -1,0 +1,224 @@
+main.dart Documentation:
+
+main.dart is the main entry point for the "Indian Constitution QuizMaster" app. Let's break down its structure and functionality:
+
+1.	Imports and Dependencies: The file begins with importing various packages and classes required for building the app. These include UI components, Excel handling, and other custom screens.
+
+2.	MCQ List and Class: A global list mcqs is declared to store Multiple Choice Questions (MCQs). The MCQ class seems to represent an individual MCQ with question-and-answer options.
+
+3.	IndianConstitutionQuizMaster Class: This class extends StatelessWidget and is the root of the app. It sets up the overall app configuration, such as title, theme, routes to different screens, and initial route.
+
+4.	Main Function: The main() function is the entry point of the application. It calls runApp() to start the app by creating an instance of the IndianConstitutionQuizMaster widget. It also calls the loadQuestion() function to load MCQs from an Excel file.
+
+5.	loadQuestion Function: This asynchronous function is responsible for loading MCQs from an Excel file stored in the assets. It first clears the existing mcqs list. It then uses the excel library to decode the Excel file into a format that can be processed.
+
+6.	Loop through Sheets and Rows: The function iterates through each sheet and row in the Excel file. For each row, it creates an MCQ object using the data in the row's cells. If a cell's value is missing, default values are used.
+
+7.	Sorting MCQs: After all MCQs are loaded, they are sorted based on the order of their questions.
+
+Overall, this section of the code initializes the app, sets up routing for different screens, and loads MCQs from an Excel file for use in the quiz. It provides the foundation for the "Indian Constitution QuizMaster" app's functionality.
+
+splashscreen.dart Documentation:
+
+splashscreen.dart contains the implementation of the splash screen, which is displayed when the app starts. This screen typically showcases the app logo and author information. Let's break down its structure and functionality:
+
+1.	SplashScreen Class: This class extends StatefulWidget and defines the splash screen widget. It has an associated state class _SplashScreenState.
+
+2.	_SplashScreenState Class: This state class extends SingleTickerProviderStateMixin, which allows it to control an animation. It contains the logic for setting up the animation and navigating to the home page after a certain delay.
+
+3.	Animation Setup: In the didChangeDependencies() method, the _animation and _controller are initialized. _animation represents the logo animation that scales its size, and _controller manages the animation's lifecycle.
+
+4.	Animation Execution: The animation is set to repeat in reverse mode, creating a pulsating effect on the logo.
+
+5.	Delayed Navigation: After a delay of 3 seconds, the app navigates to the home page ('/homePage') using Navigator.of(context).pushReplacementNamed().
+
+6.	Widget Disposal: The dispose() method is used to properly dispose of the _controller when the widget is no longer needed, preventing memory leaks.
+
+7.	Widget Build: In the build() method, a Scaffold widget is used as the base. The background color is set based on the app's theme. The UI elements include the animated logo image, a colored divider, and text indicating the creator of the app.
+
+This section of the code defines the behavior and appearance of the splash screen. It animates the logo, provides navigation to the home page after a delay, and displays author information. It contributes to enhancing the user experience during app start-up.
+
+mcq.dart Documentation:
+
+mcq.dart contains the definition of the MCQ class, which represents a Multiple-Choice Question (MCQ) along with its options and correct answer. Let's explain the class structure and purpose:
+
+1.	MCQ Class: The MCQ class encapsulates the data for a single multiple-choice question. It has the following attributes:
+•	question: A String representing the text of the question.
+•	optionA: A String representing the text of option A.
+•	optionB: A String representing the text of option B.
+•	optionC: A String representing the text of option C.
+•	optionD: A String representing the text of option D.
+•	answer: A String representing the correct answer to the question.
+
+2.	Constructor: The class has a constructor MCQ that takes six parameters corresponding to the question, four options, and the correct answer. When an instance of the MCQ class is created, these values are assigned to the corresponding attributes.
+
+The MCQ class is a simple data model used to store information about individual multiple-choice questions. It allows the app to manage and display questions, options, and answers in a structured manner. Instances of this class are likely used in various parts of the app, such as the quiz itself, the question bank, and result pages.
+
+homepage.dart Documentation:
+
+homepage.dart contains the implementation of the home page of the "Indian Constitution QuizMaster" app. This page displays various options for the user to interact with, including accessing the question bank, practicing, and taking an exam. Let's break down its structure and functionality:
+
+1.	HomePage Class: This class extends StatefulWidget and defines the home page widget. It has an associated state class _HomePageState.
+
+2.	_HomePageState Class: This state class manages the state of the home page. It includes an AnimatedList that displays a list of _CardListTile widgets.
+
+3.	Card List Initialization: In the initState() method, the _cardList is initialized with three _CardListTile widgets. Each tile represents an option: Question Bank, Practice, and Exam. The cards are animated into view using SizeTransition and AnimatedList.
+
+4.	AppBar: The AppBar widget at the top of the page displays the app's title and logo.
+
+5.	AnimatedList: The main content of the page is wrapped in an AnimatedList. The _cardList widgets are inserted into the list with animations to provide a smooth and visually appealing transition.
+
+6.	_CircularAssetImage Widget: A custom widget _CircularAssetImage is defined to display circular images with a specified asset.
+
+7.	_CardListTile Widget: Another custom widget _CardListTile is defined to display individual cards with an image, title, and subtitle. Each tile is wrapped in a Card and uses the _CircularAssetImage widget for the leading image.
+
+Overall, this section of the code creates the home page of the app, showcasing options for users to access different features such as the question bank, practice mode, and exams. The use of animations enhances the user experience by providing a visually pleasing transition between the options.
+
+question-bank.dart Documentation:
+
+question-bank.dart contains the implementation of the "Question Bank" screen in the "Indian Constitution QuizMaster" app. This screen displays a list of questions along with their corresponding answers. Let's break down its structure and functionality:
+
+1.	QuestionBank Class: This class defines the "Question Bank" screen as a stateless widget.
+
+2.	AppBar: The appBar property of the Scaffold widget creates the top app bar with a title ("Question Bank") and uses the inverse primary color from the app's theme.
+
+3.	Body Content: The body of the Scaffold contains a ListView.separated widget, which is used to display the list of questions with separators between them.
+
+4.	List Item Builder: The itemBuilder callback generates a Card for each question in the mcqs list. It determines the corresponding answer based on the selected option and displays it alongside the question.
+
+5.	Card Content: Each Card contains a ListTile with a Column widget for the question-and-answer content. The question text is displayed with its corresponding number (Q1, Q2, etc.), and the answer is shown below it.
+
+6.	Divider: A Divider is used to visually separate each question-and-answer pair.
+
+7.	Separator Builder: The separatorBuilder callback adds a small vertical spacing (SizedBox) between each Card in the list.
+
+Overall, this section of the code creates the "Question Bank" screen, where users can view a list of questions and their answers. It uses data from the mcqs list and applies appropriate styling and layout to present the information to the user.
+
+custom_widgets.dart Documentation:
+
+custom_widgets.dart contains the implementation of a custom widget named OptionTile. This widget is designed to display individual options, typically used in the context of multiple-choice questions. Let's break down its structure and functionality:
+
+1.	OptionTile Class: This class defines the OptionTile widget as a stateless widget.
+
+2.	Constructor: The constructor takes the following parameters:
+-	optionType: A String representing the type of option (e.g., "A", "B", etc.).
+-	option: A String representing the text of the option.
+-	onTap: A Function callback to be executed when the option is tapped.
+-	titleColor: An optional Color that determines the background color of the option tile.
+
+3.	InkWell: The InkWell widget wraps the entire content of the option tile, making it tappable with a splash effect.
+
+4.	Container: Inside the InkWell, a Container is used to hold the option text. It has the following properties:
+-	width: double.maxFinite: The container's width is set to fill the available width.
+-	decoration: A ShapeDecoration with rounded borders and a background color determined by titleColor.
+-	padding: Adds padding around the option text.
+
+5.	Text: Inside the container, a Text widget displays the option type and option text in the format "A. Option text".
+
+6.	Splash Color: The splashColor and splashFactory properties of the InkWell customize the splash effect when the option is tapped.
+
+7.	Border Radius: The borderRadius property of the InkWell and ShapeDecoration gives the tile rounded corners.
+
+8.	Callback: The onTap callback is triggered when the user taps the option tile.
+
+The OptionTile custom widget provides a consistent and reusable way to display options for multiple choice questions. It encapsulates the necessary visual styling and interactivity to enhance the user experience during the quiz. This widget can be easily integrated into various parts of the app where options need to be displayed.
+
+practicepage.dart Documenation:
+
+practicepage.dart contains the implementation of the "Practice" screen in the "Indian Constitution QuizMaster" app. This screen allows users to practice answering multiple choice questions and tracks their progress. Let's break down its structure and functionality:
+
+1.	PracticePage Class: This class defines the "Practice" screen as a stateful widget.
+
+2.	User Answer Tracking: The _userAns list keeps track of user-selected answers for each question, while _rightAns and _wrongAns track the number of correct and wrong answers.
+
+3.	AppBar: The appBar property of the Scaffold widget creates the top app bar with a title ("Practice") and a question navigation indicator.
+
+4.	Question and Options Widget Tree: The body property of the Scaffold contains a widget tree that displays the current question and its options using the OptionTile custom widget.
+
+5.	Bottom Navigation Bar: The bottomNavigationBar property of the Scaffold contains a widget tree for navigation buttons and answer tracking.
+
+6.	OptionTile Usage: The OptionTile widget is used to display each option for the current question. It provides interactivity and visual cues for selected and correct/incorrect options.
+
+7.	Question Change Popup: The _QuestionChangePopUp widget is used to display a dialog that allows the user to jump to a specific question number.
+
+8.	Selecting Options: The selectOption method is called when a user selects an option. It updates the user's answer and calculates the number of correct and wrong answers.
+
+9.	Getting Option Title Color: The getTitleColor method determines the color of the option title based on user selection and correctness.
+
+Overall, this section of the code creates the "Practice" screen, where users can answer multiple choice questions, track their progress, and navigate through questions. The use of custom widgets, interactivity, and dynamic data updates enhances the user experience during practice sessions.
+
+exampage.dart Documentation:
+
+exampage.dart implements the "Exam" screen in the "Indian Constitution QuizMaster" app. This screen allows users to take a timed exam where they answer randomly selected multiple-choice questions. Let's break down its structure and functionality:
+
+1.	ExamPage Class: This class defines the "Exam" screen as a stateful widget.
+
+2.	AppBar: The appBar property of the Scaffold widget creates the top app bar with the title ("Exam") and dynamic indicators for the current question and remaining time (when the exam is started).
+
+3.	Exam Widget Tree: The body property of the Scaffold contains a widget tree that displays either the exam questions and options (if exam is started) or an instruction card to start the exam.
+
+4.	InstructionCard: This custom widget provides instructions for the exam and a button to start the exam. It uses a FilledButton widget for interactivity.
+
+5.	Exam Class: This class represents the actual exam and is implemented as a stateful widget.
+
+6.	Random Question Selection: In the initState method, random questions are selected for the exam by generating unique indices from the mcqs list.
+
+7.	Timer Management: The _timer is used to manage the countdown timer for each question. The startTimer method starts the timer and updates the remaining seconds.
+
+8.	Question and Options Widget Tree: The build method contains a widget tree that displays the current question and its options using the OptionTile custom widget.
+
+9.	Option Selection: The selectOption method handles the logic for option selection, updates the user's score, and proceeds to the next question.
+
+10.	Getting Option Title Color: The getTitleColor method determines the color of the option title based on user selection and correctness.
+
+Overall, the "Exam" screen provides a timed exam experience where users answer randomly selected questions. The screen design encourages a focused approach, and the use of timers, dynamic indicators, and interactive buttons enhances the user's engagement and exam-taking experience.
+
+resultpage.dart Documentation:
+
+resultpage.dart implements the "Result" screen in the "Indian Constitution QuizMaster" app. This screen displays the user's exam results, including their score, pass or fail status, and options to navigate back to the home screen, view the answer sheet, or retry the exam.
+Here's a breakdown of the structure and functionality of the ResultPage:
+
+1.	ResultPage Class: This class defines the "Result" screen as a stateless widget.
+
+2.	AppBar: The appBar property of the Scaffold widget creates the top app bar with the title "Result."
+
+3.	Extracting Route Arguments: The routeData map is used to extract the arguments passed to the page using the ModalRoute.of(context)?.settings.arguments property. The user's score, selected MCQs indices, and user answers are retrieved from the arguments.
+
+4.	Pass Status: The pass variable is set based on whether the user's score is greater than or equal to 16 (passing score).
+
+5.	Card Widget Tree: The body property of the Scaffold contains a Card widget that displays the exam result details and navigation options.
+
+6.	Text Widgets: The widget tree includes multiple Text widgets to display the pass/fail status, user's score, and additional information based on the pass status.
+
+7.	Button Widgets: The widget tree includes three FilledButton.icon widgets for navigation:
+-	"Home" button: Navigates back to the home screen.
+-	"Answer Sheet" button: Navigates to the answer sheet screen, passing the MCQ indices and user answers.
+-	"Retry" button: Navigates to the exam screen to retry the exam.
+
+8.	Card Styling: The Card widget is styled with elevation, color, shadow, and shape properties to create a visually appealing result card.
+
+The "Result" screen provides a summary of the user's exam performance and offers options for further actions, such as reviewing the answer sheet or retrying the exam. The screen design enhances user engagement and interaction, allowing them to navigate easily and make informed decisions based on their exam results.
+
+
+answer_sheet.dart Documentation:
+
+answer_sheet.dart implements the "Answer Sheet" screen in the "Indian Constitution QuizMaster" app. This screen displays a summary of the user's answers to each question in the exam, along with the correct answers and an option to navigate back to the home screen or retry the exam.
+Here's a breakdown of the structure and functionality of the AnswerSheet:
+
+1.	AnswerSheet Class: This class defines the "Answer Sheet" screen as a stateless widget.
+
+2.	AppBar: The appBar property of the Scaffold widget creates the top app bar with the title "Answer Sheet."
+
+3.	Extracting Route Arguments: The routeData map is used to extract the arguments passed to the page using the ModalRoute.of(context)?.settings.arguments property. The MCQ indices and user answers are retrieved from the arguments.
+
+4.	ListView.separated Widget: The widget tree includes a ListView.separated widget that displays each question along with the user's answer and the correct answer. The itemBuilder generates a ListTile for each question. The separatorBuilder adds dividers between list items.
+
+5.	getAnswer Function: The getAnswer function is a helper function that takes an index and an option and returns the corresponding answer text from the provided MCQ data. This function is used to display the user's selected answer and the correct answer for each question.
+
+6.	ButtonBar Widget: The ButtonBar widget at the bottom of the screen contains two FilledButton.icon widgets for navigation:
+-	"Home" button: Navigates back to the home screen.
+-	"Retry" button: Navigates to the exam screen to retry the exam.
+
+7.	Styling and Layout: The Card, Divider, and ButtonBar widgets are styled using properties such as elevation, color, shadow, shape, and alignment to create a visually appealing and organized answer sheet layout.
+
+The "Answer Sheet" screen provides users with a detailed summary of their exam answers and allows them to review their responses in comparison to the correct answers. Users also have options to navigate back to the home screen or retry the exam, providing a seamless and informative user experience.
